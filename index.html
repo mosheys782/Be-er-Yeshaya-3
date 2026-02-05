@@ -3,350 +3,388 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cheder Be'er Yeshaya</title>
+  <title>Cheder Be'er Yeshaya · Suffern, NY</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Secular+One&family=Hepta+Slab:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --honey: #F5A623;
-      --honey-light: #FFC857;
-      --honey-glow: #F5A62333;
-      --sky: #5BB5E8;
-      --sky-light: #A8D8F0;
-      --sky-pale: #E8F4FC;
-      --wine: #8B2252;
-      --wine-soft: #A83C6C;
-      --sage: #6BA368;
-      --coral: #E87461;
-      --cream: #FFF8ED;
-      --cream-dark: #F5EDDC;
-      --parchment: #FDF5E6;
-      --warm-white: #FFFDF8;
-      --brown: #5C3D2E;
-      --brown-soft: #7A5A4A;
-      --brown-light: #A08070;
-      --ink: #2C1810;
-      --text: #4A3728;
-      --text-light: #7A6555;
-      --display: 'Secular One', sans-serif;
-      --heading: 'Hepta Slab', serif;
-      --body: 'Fredoka', sans-serif;
+      --gold: #D4A543;
+      --gold-light: #F0CC6B;
+      --gold-glow: rgba(212,165,67,0.15);
+      --gold-deep: #B8892E;
+      --wine: #7A2048;
+      --wine-light: #9C3060;
+      --wine-deep: #5E1838;
+      --sky: #4DA8D8;
+      --sage: #5E9E6B;
+      --cream: #FBF6EE;
+      --cream-warm: #F5EDE0;
+      --ivory: #FEFCF8;
+      --bark: #3D2B1F;
+      --bark-mid: #5C4033;
+      --bark-light: #8B7260;
+      --text: #4A3828;
+      --text-soft: #7A6B5D;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: var(--body); background: var(--warm-white); color: var(--ink); overflow-x: hidden; }
+    body { font-family: var(--sans); background: var(--ivory); color: var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* sparkles */
-    .sparkle { position: absolute; font-size: var(--sz, 18px); opacity: var(--op, 0.12); pointer-events: none; animation: twinkle 3s ease-in-out infinite; animation-delay: var(--delay, 0s); }
-    @keyframes twinkle { 0%,100% { opacity: var(--op, 0.12); transform: scale(1); } 50% { opacity: calc(var(--op, 0.12) * 2.5); transform: scale(1.2); } }
+    /* ── Utility ── */
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 1.5rem; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s } .d2 { transition-delay: .2s } .d3 { transition-delay: .3s } .d4 { transition-delay: .4s } .d5 { transition-delay: .5s }
 
-    /* waves */
-    .wave { width: 100%; overflow: hidden; line-height: 0; position: relative; z-index: 2; }
-    .wave svg { display: block; width: 100%; height: 35px; }
+    /* ── Buttons ── */
+    .btn { display: inline-flex; align-items: center; gap: .45rem; padding: .8rem 1.8rem; font-family: var(--sans); font-size: .9rem; font-weight: 600; border-radius: 50px; text-decoration: none; border: none; cursor: pointer; transition: all .35s ease; letter-spacing: .01em; }
+    .btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #fff; box-shadow: 0 4px 20px rgba(212,165,67,.35); }
+    .btn-gold:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 30px rgba(212,165,67,.45); }
+    .btn-wine { background: linear-gradient(135deg, var(--wine), var(--wine-light)); color: #fff; box-shadow: 0 4px 20px rgba(122,32,72,.25); }
+    .btn-wine:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 30px rgba(122,32,72,.35); }
+    .btn-outline { background: transparent; color: var(--bark); border: 2px solid var(--cream-warm); }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-white { background: rgba(255,255,255,.15); color: #fff; border: 2px solid rgba(255,255,255,.3); backdrop-filter: blur(4px); }
+    .btn-white:hover { background: rgba(255,255,255,.25); transform: translateY(-2px); }
 
-    /* clouds */
-    .clouds-wrap { position: absolute; top: 0; left: 0; right: 0; height: 100%; pointer-events: none; overflow: hidden; }
-    .cloud { position: absolute; background: white; border-radius: 100px; opacity: 0.35; animation: drift linear infinite; }
-    .cloud::before, .cloud::after { content: ''; position: absolute; background: white; border-radius: 50%; }
-    .c1 { width: 200px; height: 50px; top: 10%; left: -220px; animation-duration: 50s; }
-    .c1::before { width: 80px; height: 80px; top: -40px; left: 30px; }
-    .c1::after { width: 60px; height: 60px; top: -25px; left: 100px; }
-    .c2 { width: 140px; height: 38px; top: 22%; left: -160px; animation-duration: 62s; animation-delay: -20s; opacity: 0.22; }
-    .c2::before { width: 55px; height: 55px; top: -28px; left: 18px; }
-    .c2::after { width: 45px; height: 45px; top: -18px; left: 65px; }
-    .c3 { width: 170px; height: 42px; top: 6%; left: -190px; animation-duration: 70s; animation-delay: -35s; opacity: 0.28; }
-    .c3::before { width: 65px; height: 65px; top: -32px; left: 22px; }
-    .c3::after { width: 50px; height: 50px; top: -20px; left: 85px; }
-    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 300px)); } }
+    /* ── Section heading ── */
+    .section-tag { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem 1rem; border-radius: 50px; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 1rem; }
+    .tag-gold { background: var(--gold-glow); color: var(--gold-deep); border: 1px solid rgba(212,165,67,.2); }
+    .tag-wine { background: rgba(122,32,72,.08); color: var(--wine); border: 1px solid rgba(122,32,72,.12); }
 
-    /* stickers */
-    .sticker { position: absolute; background: white; border-radius: 20px; padding: 0.55rem 1rem; box-shadow: 0 6px 20px rgba(0,0,0,0.07); font-size: 0.82rem; font-weight: 600; display: flex; align-items: center; gap: 0.35rem; z-index: 3; animation: bob 3s ease-in-out infinite; }
-    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-
-    /* photo frame */
-    .photo-frame { background: white; border-radius: 24px; padding: 10px; box-shadow: 0 15px 45px rgba(92,61,46,0.1), 0 0 0 3px var(--honey-light); overflow: hidden; }
-    .photo-inner { width: 100%; border-radius: 18px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.6rem; position: relative; overflow: hidden; }
-    .photo-inner .icon { font-size: 3.5rem; z-index: 1; }
-    .photo-inner .label { font-size: 0.85rem; color: var(--brown-light); z-index: 1; font-style: italic; }
-
-    /* btns */
-    .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1.7rem; font-family: var(--body); font-size: 0.92rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; border-radius: 30px; transition: all 0.3s; }
-    .btn-honey { background: linear-gradient(135deg, var(--honey), var(--honey-light)); color: white; box-shadow: 0 4px 18px rgba(245,166,35,0.3); }
-    .btn-honey:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(245,166,35,0.4); }
-    .btn-wine { background: linear-gradient(135deg, var(--wine), var(--wine-soft)); color: white; box-shadow: 0 4px 18px rgba(139,34,82,0.2); }
-    .btn-wine:hover { transform: translateY(-3px); }
-    .btn-sky { background: linear-gradient(135deg, var(--sky), var(--sky-light)); color: white; box-shadow: 0 4px 18px rgba(91,181,232,0.25); }
-    .btn-sky:hover { transform: translateY(-3px); }
-    .btn-outline { background: white; color: var(--brown); border: 2px solid var(--cream-dark); }
-    .btn-outline:hover { border-color: var(--honey); color: var(--honey); }
-
-    /* reveal - starts visible, animates when scrolled into view */
-    .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .rd1 { transition-delay: 0.08s; } .rd2 { transition-delay: 0.16s; } .rd3 { transition-delay: 0.24s; } .rd4 { transition-delay: 0.32s; } .rd5 { transition-delay: 0.4s; }
-    @keyframes popIn { from { opacity: 0; transform: translateY(22px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    /* ── Placeholder frame ── */
+    .frame { background: #fff; border-radius: 20px; padding: 8px; box-shadow: 0 20px 60px rgba(61,43,31,.08), 0 0 0 1px rgba(212,165,67,.15); }
+    .frame-inner { width: 100%; border-radius: 14px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: .4rem; overflow: hidden; }
+    .frame-inner .ph-icon { font-size: 2.8rem; opacity: .6; }
+    .frame-inner .ph-label { font-size: .78rem; color: var(--bark-light); font-style: italic; }
 
     /*================================================================
       NAV
     ================================================================*/
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0.85rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: rgba(255,253,248,0.92); backdrop-filter: blur(16px); border-bottom: 3px solid var(--honey); transition: all 0.3s; }
-    nav.scrolled { box-shadow: 0 4px 20px rgba(92,61,46,0.1); }
-    .nav-logo { display: flex; align-items: center; gap: 0.55rem; }
-    .nav-logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--honey), var(--honey-light)); border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; box-shadow: 0 3px 10px rgba(245,166,35,0.25); }
-    .nav-logo-text { font-family: var(--display); font-size: 1.15rem; color: var(--brown); }
-    .nav-logo-text span { color: var(--honey); }
-    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
-    .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--brown-soft); text-decoration: none; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--honey); }
-    .nav-cta { background: linear-gradient(135deg, var(--honey), var(--honey-light)) !important; color: white !important; padding: 0.5rem 1.3rem !important; border-radius: 22px; font-weight: 600 !important; box-shadow: 0 3px 12px rgba(245,166,35,0.25); }
-    .nav-cta:hover { transform: translateY(-2px) !important; }
-    .nav-dropdown { position: relative; }
-    .nav-dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: white; border-radius: 14px; padding: 0.5rem 0; min-width: 180px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid var(--cream-dark); z-index: 200; }
-    .nav-dropdown:hover .nav-dropdown-content { display: block; }
-    .nav-dropdown-content a { display: block; padding: 0.45rem 1.2rem; font-size: 0.82rem; }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-    .nav-hamburger span { width: 22px; height: 2.5px; background: var(--brown); border-radius: 2px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: .75rem 2rem; display: flex; align-items: center; justify-content: space-between; background: rgba(254,252,248,.88); backdrop-filter: blur(20px) saturate(1.4); border-bottom: 1px solid rgba(212,165,67,.15); transition: all .4s; }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(61,43,31,.08); border-bottom-color: rgba(212,165,67,.3); }
+    .nav-brand { display: flex; align-items: center; gap: .6rem; text-decoration: none; }
+    .nav-brand-mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--gold), var(--gold-deep)); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 3px 12px rgba(212,165,67,.3); }
+    .nav-brand-name { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--bark); }
+    .nav-brand-name b { color: var(--gold-deep); }
+    .nav-links { display: flex; gap: 1.75rem; align-items: center; }
+    .nav-links a { font-size: .82rem; font-weight: 500; color: var(--bark-mid); text-decoration: none; transition: color .3s; position: relative; }
+    .nav-links a:hover { color: var(--gold-deep); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); border-radius: 2px; transition: width .3s; }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta-btn { background: linear-gradient(135deg, var(--gold), var(--gold-light)) !important; color: #fff !important; padding: .45rem 1.15rem !important; border-radius: 50px; font-weight: 600 !important; font-size: .82rem !important; box-shadow: 0 3px 15px rgba(212,165,67,.3); border: none; }
+    .nav-cta-btn::after { display: none !important; }
+    .nav-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,165,67,.4); }
+    .nav-dd { position: relative; }
+    .nav-dd-menu { display: none; position: absolute; top: calc(100% + 8px); left: -16px; background: #fff; border-radius: 16px; padding: .6rem 0; min-width: 190px; box-shadow: 0 12px 40px rgba(0,0,0,.1); border: 1px solid var(--cream-warm); z-index: 200; }
+    .nav-dd:hover .nav-dd-menu { display: block; }
+    .nav-dd-menu a { display: block; padding: .45rem 1.2rem; font-size: .8rem; }
+    .nav-dd-menu a::after { display: none; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { width: 20px; height: 2px; background: var(--bark); border-radius: 2px; transition: all .3s; }
 
     /*================================================================
-      PAGE HEADER
+      PAGE HEADER — THE HERO IDENTITY
     ================================================================*/
-    .page-header { text-align: center; padding: 5rem 2rem 1.25rem; background: linear-gradient(170deg, var(--cream) 0%, var(--sky-pale) 30%, var(--cream) 100%); position: relative; z-index: 2; }
-    .page-header h1 { font-family: var(--display); font-size: clamp(2rem, 5vw, 3.2rem); color: var(--brown); line-height: 1.15; margin-bottom: 0.25rem; }
-    .page-header h1 span { color: var(--wine); }
-    .page-header .location { font-family: var(--heading); font-size: clamp(0.9rem, 1.5vw, 1.1rem); color: var(--brown-light); font-weight: 400; letter-spacing: 0.06em; }
+    .page-hero {
+      position: relative; padding: 7rem 2rem 3rem; text-align: center; overflow: hidden;
+      background: linear-gradient(165deg, var(--cream) 0%, var(--cream-warm) 40%, #EDE3D4 100%);
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0; opacity: .04;
+      background-image: radial-gradient(circle at 20% 50%, var(--gold) 1px, transparent 1px), radial-gradient(circle at 80% 20%, var(--gold) 1px, transparent 1px), radial-gradient(circle at 50% 80%, var(--gold) 1px, transparent 1px);
+      background-size: 60px 60px, 80px 80px, 70px 70px;
+    }
+    .page-hero-title { font-family: var(--serif); font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800; color: var(--bark); line-height: 1.1; margin-bottom: .35rem; position: relative; }
+    .page-hero-title .accent { color: var(--wine); position: relative; }
+    .page-hero-title .accent::after { content: ''; position: absolute; bottom: 4px; left: -2px; right: -2px; height: 10px; background: var(--gold-light); opacity: .3; border-radius: 4px; z-index: -1; }
+    .page-hero-loc { font-family: var(--serif); font-size: clamp(.95rem, 1.8vw, 1.2rem); color: var(--bark-light); font-weight: 400; font-style: italic; letter-spacing: .04em; position: relative; }
+    .page-hero-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 3px; margin: 1.25rem auto 0; }
+
+    /* floating decorative dots */
+    .hero-dot { position: absolute; border-radius: 50%; opacity: .12; pointer-events: none; }
+    .hero-dot-1 { width: 300px; height: 300px; background: var(--gold); top: -80px; right: -60px; }
+    .hero-dot-2 { width: 200px; height: 200px; background: var(--wine); bottom: -40px; left: -40px; }
+    .hero-dot-3 { width: 120px; height: 120px; background: var(--gold-light); top: 40%; left: 8%; }
 
     /*================================================================
-      HERO
+      HOME HERO
     ================================================================*/
-    .hero { min-height: auto; display: flex; align-items: center; position: relative; background: linear-gradient(170deg, var(--cream) 0%, var(--sky-pale) 50%, var(--cream) 100%); overflow: hidden; padding: 2rem 2rem 2.5rem; }
-    .hero-inner { max-width: 1150px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem; align-items: center; position: relative; z-index: 2; }
-    .hero h1 { font-family: var(--display); font-size: clamp(1.6rem, 3.5vw, 2.4rem); line-height: 1.2; color: var(--brown); margin-bottom: 1rem; opacity: 0; animation: popIn 0.8s 0.3s ease forwards; }
-    .hero h1 .hl { position: relative; color: var(--wine); display: inline-block; }
-    .hero h1 .hl::after { content: ''; position: absolute; bottom: 2px; left: -4px; right: -4px; height: 13px; background: var(--honey-light); opacity: 0.35; border-radius: 4px; z-index: -1; transform: rotate(-1deg); }
-    .hero-video { opacity: 0; animation: popIn 0.9s 0.5s ease forwards; position: relative; }
-    .hero-video .photo-frame { transform: rotate(2deg); }
-    .hero-video .photo-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--sky-pale), var(--cream)); }
-    .hero-video .sticker-a { top: -12px; right: -8px; color: var(--wine); }
-    .hero-video .sticker-b { bottom: 15px; left: -12px; color: var(--sage); animation-delay: -1.5s; }
+    .home-hero { padding: 3rem 0 2.5rem; background: var(--ivory); position: relative; overflow: hidden; }
+    .home-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .home-hero h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.6rem); font-weight: 700; color: var(--bark); line-height: 1.2; margin-bottom: 1rem; }
+    .home-hero h2 .hl { color: var(--wine); position: relative; display: inline; text-decoration: underline; text-decoration-color: var(--gold-light); text-underline-offset: 5px; text-decoration-thickness: 3px; }
+    .home-hero-badges { display: flex; gap: .6rem; flex-wrap: wrap; }
+    .badge { display: inline-flex; align-items: center; gap: .3rem; padding: .4rem .85rem; background: #fff; border-radius: 50px; font-size: .78rem; font-weight: 600; color: var(--bark-mid); box-shadow: 0 2px 12px rgba(0,0,0,.05); border: 1px solid var(--cream-warm); }
+    .badge em { font-size: 1rem; }
+    .video-wrap { position: relative; }
+    .video-wrap .frame { transform: rotate(1.5deg); transition: transform .4s; }
+    .video-wrap:hover .frame { transform: rotate(0deg); }
+    .video-wrap .frame-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, #E8F0F8, var(--cream)); }
 
     /*================================================================
-      LOOK BACK
+      LOOKBACK
     ================================================================*/
-    .lookback { padding: 2rem 2rem; background: var(--cream-dark); text-align: center; }
-    .lookback h3 { font-family: var(--heading); font-size: clamp(1rem, 2vw, 1.3rem); color: var(--brown-soft); font-weight: 500; font-style: italic; margin-bottom: 1.25rem; }
-    .lookback-carousel { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
-    .lookback-vid { width: 250px; }
-    .lookback-vid .photo-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--cream), var(--sky-pale)); }
+    .lookback { padding: 2.5rem 0; background: var(--cream-warm); }
+    .lookback-title { font-family: var(--serif); font-size: 1.1rem; color: var(--bark-light); font-weight: 400; font-style: italic; text-align: center; margin-bottom: 1.5rem; }
+    .lookback-row { display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap; }
+    .lookback-item { width: 240px; }
+    .lookback-item .frame-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--cream), #E8F0F8); }
 
     /*================================================================
-      POSITIVELY ENTHUSIASTIC
+      PILLARS
     ================================================================*/
-    .enthusiastic { padding: 3rem 2rem; background: var(--warm-white); }
-    .enthusiastic-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 2.5rem; align-items: center; }
-    .enthusiastic h2 { font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: var(--brown); margin-bottom: 0.6rem; }
-    .enthusiastic .sub { font-size: 1.05rem; color: var(--text); line-height: 1.7; margin-bottom: 1.5rem; }
-    .enthusiastic .sub strong { color: var(--brown); }
-    .pillar-list { display: flex; flex-direction: column; gap: 0.7rem; }
-    .pillar-item { display: flex; align-items: center; gap: 0.8rem; background: white; padding: 0.7rem 1.1rem; border-radius: 16px; border: 2px solid var(--cream-dark); transition: all 0.3s; }
-    .pillar-item:hover { border-color: var(--honey-light); transform: translateX(6px); box-shadow: 0 6px 20px rgba(245,166,35,0.08); }
-    .pillar-item .pip { width: 40px; height: 40px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-    .pillar-item:nth-child(1) .pip { background: linear-gradient(135deg, #FFECD2, #FCB69F); }
-    .pillar-item:nth-child(2) .pip { background: linear-gradient(135deg, #A8E6CF, #DCEDC1); }
-    .pillar-item:nth-child(3) .pip { background: linear-gradient(135deg, #FFF3B0, #FFD93D); }
-    .pillar-item:nth-child(4) .pip { background: linear-gradient(135deg, #C3BEF7, #8B7EC8); }
-    .pillar-item:nth-child(5) .pip { background: linear-gradient(135deg, #B5DEFF, #5BB5E8); }
-    .pillar-item:nth-child(6) .pip { background: linear-gradient(135deg, #FFB7B2, #E87461); }
-    .pillar-item h4 { font-family: var(--heading); font-size: 0.92rem; font-weight: 500; color: var(--brown); }
-    .flywheel-frame .photo-inner { aspect-ratio: 1; background: linear-gradient(135deg, var(--cream), var(--parchment)); }
+    .pillars { padding: 4rem 0; background: var(--ivory); }
+    .pillars-header { margin-bottom: 2rem; }
+    .pillars-header h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: var(--bark); }
+    .pillars-header p { font-size: 1rem; color: var(--text-soft); line-height: 1.7; margin-top: .5rem; max-width: 500px; }
+    .pillars-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .pillar-stack { display: flex; flex-direction: column; gap: .65rem; }
+    .pillar-card { display: flex; align-items: center; gap: .85rem; background: #fff; padding: .85rem 1.15rem; border-radius: 16px; border: 1px solid rgba(0,0,0,.04); box-shadow: 0 2px 12px rgba(0,0,0,.03); transition: all .35s; cursor: default; }
+    .pillar-card:hover { transform: translateX(8px); box-shadow: 0 8px 30px rgba(212,165,67,.1); border-color: rgba(212,165,67,.2); }
+    .pillar-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+    .pi-1 { background: linear-gradient(135deg, #FFF0D4, #FFDDA6); }
+    .pi-2 { background: linear-gradient(135deg, #D4F0E0, #A8E0C0); }
+    .pi-3 { background: linear-gradient(135deg, #FFF5CC, #FFE580); }
+    .pi-4 { background: linear-gradient(135deg, #E0D8F8, #C0B0F0); }
+    .pi-5 { background: linear-gradient(135deg, #D0E8FF, #A0D0FF); }
+    .pi-6 { background: linear-gradient(135deg, #FFD8D0, #FFB0A0); }
+    .pillar-card h4 { font-family: var(--sans); font-size: .88rem; font-weight: 500; color: var(--bark); }
+    .pillar-card h4 strong { font-weight: 700; }
+    .pillar-card h4 em { color: var(--wine); }
+    .flywheel-frame .frame-inner { aspect-ratio: 1; background: linear-gradient(135deg, var(--cream), var(--cream-warm)); }
 
     /*================================================================
-      CTA BAR
+      CTA BAND
     ================================================================*/
-    .home-cta { background: linear-gradient(135deg, var(--wine), var(--wine-soft)); padding: 2.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
-    .home-cta::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 22px, rgba(255,255,255,0.03) 22px, rgba(255,255,255,0.03) 44px); }
-    .home-cta h2 { font-family: var(--display); font-size: clamp(1.5rem, 3.5vw, 2.3rem); color: white; position: relative; z-index: 1; margin-bottom: 1rem; }
-    .home-cta-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
-    .home-bottom { background: var(--warm-white); padding: 2rem 2rem; text-align: center; }
-    .home-bottom h2 { font-family: var(--display); font-size: clamp(1.3rem, 3vw, 2rem); color: var(--brown); margin-bottom: 0.4rem; }
-    .home-bottom h2 em { color: var(--wine); font-style: normal; text-decoration: underline; text-decoration-color: var(--honey); text-underline-offset: 4px; text-decoration-thickness: 3px; }
-    .home-bottom .links { margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; }
+    .cta-band {
+      position: relative; padding: 3.5rem 2rem; text-align: center; overflow: hidden;
+      background: linear-gradient(135deg, var(--wine-deep) 0%, var(--wine) 50%, var(--wine-light) 100%);
+    }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,.02) 20px, rgba(255,255,255,.02) 40px);
+    }
+    .cta-band::after {
+      content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(212,165,67,.12) 0%, transparent 70%); border-radius: 50%;
+    }
+    .cta-band h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 700; color: #fff; position: relative; z-index: 2; margin-bottom: 1.25rem; line-height: 1.25; }
+    .cta-band h2 em { font-style: italic; color: var(--gold-light); }
+    .cta-band .btn { position: relative; z-index: 2; }
+    .cta-tagline { background: var(--ivory); padding: 2.5rem 2rem; text-align: center; }
+    .cta-tagline h2 { font-family: var(--serif); font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700; color: var(--bark); line-height: 1.3; }
+    .cta-tagline h2 em { color: var(--wine); font-style: italic; text-decoration: underline; text-decoration-color: var(--gold-light); text-underline-offset: 4px; text-decoration-thickness: 3px; }
+    .cta-tagline .btn { margin-top: 1rem; }
 
     /*================================================================
-      OUR MISSION
+      MISSION
     ================================================================*/
-    .mission { padding: 3rem 2rem; background: var(--cream); }
-    .mission-top { max-width: 700px; margin: 0 auto 2rem; text-align: center; }
-    .mission-top h2 { font-family: var(--display); font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--brown); line-height: 1.2; margin-bottom: 0.5rem; }
-    .mission-top h2 em { color: var(--wine); font-style: normal; text-decoration: underline; text-decoration-color: var(--honey); text-underline-offset: 5px; text-decoration-thickness: 3px; }
-    .mission-top .photo-frame { max-width: 450px; margin: 1rem auto 0; }
-    .mission-top .photo-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--cream), var(--sky-pale)); }
-    .mission-sub { font-size: 1.1rem; color: var(--text); line-height: 1.7; }
-    .mission-pillars-header { text-align: center; margin-bottom: 1.5rem; }
-    .mission-pillars-header h3 { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--brown); }
-    .mission-pillars-header h3 span { color: var(--honey); }
-    .mission-grid { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .mission-pill { background: white; border-radius: 20px; padding: 1.5rem; text-align: center; border: 2px solid transparent; transition: all 0.3s; }
-    .mission-pill:hover { border-color: var(--honey-light); transform: translateY(-5px); box-shadow: 0 12px 30px rgba(245,166,35,0.1); }
-    .mission-pill .m-icon { width: 55px; height: 55px; border-radius: 18px; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
-    .mission-pill:nth-child(1) .m-icon { background: linear-gradient(135deg, #FFECD2, #FCB69F); }
-    .mission-pill:nth-child(2) .m-icon { background: linear-gradient(135deg, #A8E6CF, #DCEDC1); }
-    .mission-pill:nth-child(3) .m-icon { background: linear-gradient(135deg, #FFF3B0, #FFD93D); }
-    .mission-pill:nth-child(4) .m-icon { background: linear-gradient(135deg, #C3BEF7, #8B7EC8); }
-    .mission-pill:nth-child(5) .m-icon { background: linear-gradient(135deg, #B5DEFF, #5BB5E8); }
-    .mission-pill:nth-child(6) .m-icon { background: linear-gradient(135deg, #FFB7B2, #E87461); }
-    .mission-pill h4 { font-family: var(--heading); font-size: 0.95rem; font-weight: 600; color: var(--brown); }
-    .mission-bottom { max-width: 700px; margin: 2rem auto 0; text-align: center; }
-    .mission-bottom h3 { font-family: var(--display); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--brown); }
-    .mission-bottom h3 em { color: var(--wine); font-style: normal; text-decoration: underline; text-decoration-color: var(--honey); text-underline-offset: 4px; }
-    .mission-bottom .link { margin-top: 1rem; }
+    .mission { padding: 4rem 0; background: var(--cream); }
+    .mission-intro { text-align: center; max-width: 680px; margin: 0 auto 2.5rem; }
+    .mission-intro h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--bark); line-height: 1.2; margin-bottom: .6rem; }
+    .mission-intro h2 em { color: var(--wine); font-style: italic; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 5px; text-decoration-thickness: 3px; }
+    .mission-intro .frame { max-width: 480px; margin: 1.25rem auto 0; }
+    .mission-intro .frame-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--cream), #E8F0F8); }
+    .mission-intro p { font-size: 1.05rem; color: var(--text-soft); line-height: 1.7; margin-top: 1.25rem; }
+    .mission-kindle { text-align: center; margin-bottom: 2rem; }
+    .mission-kindle h3 { font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 700; color: var(--bark); }
+    .mission-kindle h3 span { color: var(--gold-deep); }
+    .mission-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 880px; margin: 0 auto; }
+    .m-pill { background: #fff; border-radius: 18px; padding: 1.5rem 1.2rem; text-align: center; border: 1px solid rgba(0,0,0,.04); transition: all .35s; }
+    .m-pill:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(212,165,67,.1); border-color: rgba(212,165,67,.2); }
+    .m-pill-icon { width: 52px; height: 52px; border-radius: 16px; margin: 0 auto .75rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .m-pill h4 { font-size: .88rem; font-weight: 600; color: var(--bark); }
+    .m-pill h4 em { color: var(--wine); }
+    .mission-foot { text-align: center; margin-top: 2.5rem; }
+    .mission-foot h3 { font-family: var(--serif); font-size: clamp(1.2rem, 2.2vw, 1.6rem); font-weight: 600; color: var(--bark); margin-bottom: .75rem; }
+    .mission-foot h3 em { color: var(--wine); font-style: italic; text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 4px; }
 
     /*================================================================
       REB SHAYALA
     ================================================================*/
-    .shayala { padding: 3rem 2rem; background: var(--warm-white); }
-    .shayala-inner { max-width: 1000px; margin: 0 auto; }
-    .shayala-hero { text-align: center; margin-bottom: 2rem; }
-    .shayala-hero .photo-frame { max-width: 350px; margin: 0 auto 1rem; }
-    .shayala-hero .photo-inner { aspect-ratio: 4/3; background: linear-gradient(135deg, var(--parchment), var(--cream-dark)); }
-    .shayala-hero h2 { font-family: var(--display); font-size: clamp(1.8rem, 3.5vw, 2.5rem); color: var(--brown); margin-bottom: 0.5rem; }
-    .shayala-hero h2 span { color: var(--wine); }
-    .shayala-hero p { font-size: 1.05rem; color: var(--text); line-height: 1.7; max-width: 550px; margin: 0 auto; }
-    .shayala-body { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; }
-    .shayala-body-text h3 { font-family: var(--heading); font-size: 1.3rem; font-weight: 600; color: var(--brown); margin-bottom: 0.75rem; }
-    .shayala-body-text h3 em { color: var(--honey); }
-    .shayala-body-text p { font-size: 1rem; line-height: 1.8; color: var(--text); margin-bottom: 0.75rem; }
-    .shayala-body-text p strong { color: var(--wine); font-weight: 700; }
-    .shayala-body-text .callout { margin-top: 1rem; background: linear-gradient(135deg, var(--wine), var(--wine-soft)); color: white; padding: 1rem 1.3rem; border-radius: 16px; font-family: var(--heading); font-size: 1.05rem; font-weight: 600; box-shadow: 0 6px 18px rgba(139,34,82,0.18); display: flex; align-items: center; gap: 0.6rem; }
-    .shayala-body-photo .photo-frame { transform: rotate(-2deg); }
-    .shayala-body-photo .photo-inner { aspect-ratio: 3/4; background: linear-gradient(135deg, var(--parchment), var(--cream-dark)); }
-    .shayala-bottom { text-align: center; margin-top: 2rem; }
-    .shayala-bottom h3 { font-family: var(--display); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--brown); margin-bottom: 0.5rem; }
-    .shayala-bottom .link { margin-top: 0.75rem; }
+    .shayala { padding: 4rem 0; background: var(--ivory); }
+    .shayala-top { text-align: center; margin-bottom: 2.5rem; }
+    .shayala-top .frame { max-width: 320px; margin: 0 auto 1.25rem; }
+    .shayala-top .frame-inner { aspect-ratio: 4/3; background: linear-gradient(135deg, var(--cream-warm), var(--cream)); }
+    .shayala-top h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: var(--bark); margin-bottom: .5rem; }
+    .shayala-top h2 span { color: var(--wine); }
+    .shayala-top p { font-size: 1rem; color: var(--text-soft); line-height: 1.7; max-width: 520px; margin: 0 auto; }
+    .shayala-body { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center; max-width: 850px; margin: 0 auto; }
+    .shayala-text h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--bark); margin-bottom: .75rem; }
+    .shayala-text h3 em { color: var(--gold-deep); font-style: italic; }
+    .shayala-text p { font-size: .95rem; line-height: 1.85; color: var(--text-soft); }
+    .shayala-text p strong { color: var(--wine); font-weight: 700; }
+    .shayala-callout { margin-top: 1.25rem; background: linear-gradient(135deg, var(--wine), var(--wine-light)); color: #fff; padding: 1rem 1.3rem; border-radius: 16px; font-family: var(--serif); font-size: 1rem; font-weight: 600; font-style: italic; box-shadow: 0 8px 25px rgba(122,32,72,.2); display: flex; align-items: center; gap: .6rem; }
+    .shayala-photo .frame { transform: rotate(-2deg); transition: transform .4s; }
+    .shayala-photo .frame:hover { transform: rotate(0deg); }
+    .shayala-photo .frame-inner { aspect-ratio: 3/4; background: linear-gradient(135deg, var(--cream-warm), var(--cream)); }
+    .shayala-foot { text-align: center; margin-top: 2.5rem; }
+    .shayala-foot h3 { font-family: var(--serif); font-size: clamp(1.2rem, 2.2vw, 1.6rem); font-weight: 600; color: var(--bark); margin-bottom: .75rem; }
 
     /*================================================================
       LEADERSHIP
     ================================================================*/
-    .leadership { padding: 3rem 2rem; background: var(--cream); }
-    .leadership-inner { max-width: 1100px; margin: 0 auto; }
-    .leadership h2 { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.3rem); color: var(--brown); text-align: center; margin-bottom: 2rem; }
-    .leadership-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-    .lg { background: white; padding: 1.5rem 1.3rem; border-radius: 20px; text-align: center; border: 2px solid transparent; transition: all 0.3s; }
-    .lg:hover { border-color: var(--honey-light); transform: translateY(-4px); }
-    .lg-icon { width: 48px; height: 48px; border-radius: 15px; margin: 0 auto 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
-    .lg:nth-child(1) .lg-icon { background: linear-gradient(135deg, #FFECD2, #FCB69F); }
-    .lg:nth-child(2) .lg-icon { background: linear-gradient(135deg, #B5DEFF, #5BB5E8); }
-    .lg:nth-child(3) .lg-icon { background: linear-gradient(135deg, #C3BEF7, #8B7EC8); }
-    .lg:nth-child(4) .lg-icon { background: linear-gradient(135deg, #A8E6CF, #6BA368); }
-    .lg h4 { font-family: var(--heading); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--brown); margin-bottom: 0.75rem; }
-    .lg ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .lg li { font-size: 0.88rem; color: var(--text); }
-    .lg li .role { display: block; font-size: 0.73rem; color: var(--text-light); margin-top: 0.1rem; }
+    .leadership { padding: 4rem 0; background: var(--cream); }
+    .leadership-head { text-align: center; margin-bottom: 2.25rem; }
+    .leadership-head h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: var(--bark); }
+    .leadership-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .l-card { background: #fff; padding: 1.5rem 1.2rem; border-radius: 18px; text-align: center; border: 1px solid rgba(0,0,0,.04); transition: all .35s; }
+    .l-card:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,.06); border-color: rgba(212,165,67,.2); }
+    .l-card-icon { width: 48px; height: 48px; border-radius: 14px; margin: 0 auto .75rem; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; }
+    .l-card:nth-child(1) .l-card-icon { background: linear-gradient(135deg, #FFF0D4, #FFDDA6); }
+    .l-card:nth-child(2) .l-card-icon { background: linear-gradient(135deg, #D0E8FF, #A0D0FF); }
+    .l-card:nth-child(3) .l-card-icon { background: linear-gradient(135deg, #E0D8F8, #C0B0F0); }
+    .l-card:nth-child(4) .l-card-icon { background: linear-gradient(135deg, #D4F0E0, #A8E0C0); }
+    .l-card h4 { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--bark); margin-bottom: .65rem; }
+    .l-card ul { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .l-card li { font-size: .85rem; color: var(--text-soft); }
+    .l-card li .role { display: block; font-size: .7rem; color: var(--bark-light); margin-top: .05rem; }
 
     /*================================================================
       RESOURCES
     ================================================================*/
-    .resources { padding: 3rem 2rem; background: var(--warm-white); }
-    .resources-inner { max-width: 850px; margin: 0 auto; }
-    .resources h2 { font-family: var(--display); font-size: clamp(1.8rem, 3vw, 2.3rem); color: var(--brown); text-align: center; margin-bottom: 1.75rem; }
-    .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
-    .res-card { background: white; border-radius: 18px; padding: 1.1rem 1.2rem; display: flex; align-items: center; gap: 0.9rem; border: 2px solid var(--cream-dark); transition: all 0.3s; text-decoration: none; }
-    .res-card:hover { border-color: var(--honey-light); transform: translateY(-4px); box-shadow: 0 8px 22px rgba(245,166,35,0.08); }
-    .res-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
-    .res-card:nth-child(1) .res-icon { background: linear-gradient(135deg, #FFECD2, #FCB69F); }
-    .res-card:nth-child(2) .res-icon { background: linear-gradient(135deg, #B5DEFF, #5BB5E8); }
-    .res-card:nth-child(3) .res-icon { background: linear-gradient(135deg, #A8E6CF, #6BA368); }
-    .res-card:nth-child(4) .res-icon { background: linear-gradient(135deg, #C3BEF7, #8B7EC8); }
-    .res-card:nth-child(5) .res-icon { background: linear-gradient(135deg, #FFB7B2, #E87461); }
-    .res-text h4 { font-family: var(--heading); font-size: 0.92rem; font-weight: 600; color: var(--brown); }
-    .res-text p { font-size: 0.8rem; color: var(--honey); font-weight: 600; margin-top: 0.1rem; }
+    .resources { padding: 4rem 0; background: var(--ivory); }
+    .resources-head { text-align: center; margin-bottom: 2rem; }
+    .resources-head h2 { font-family: var(--serif); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: var(--bark); }
+    .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .85rem; max-width: 860px; margin: 0 auto; }
+    .res-card { background: #fff; border-radius: 16px; padding: 1rem 1.15rem; display: flex; align-items: center; gap: .8rem; border: 1px solid rgba(0,0,0,.04); text-decoration: none; transition: all .35s; }
+    .res-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.05); border-color: rgba(212,165,67,.2); }
+    .res-card-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .res-card:nth-child(1) .res-card-icon { background: linear-gradient(135deg, #FFF0D4, #FFDDA6); }
+    .res-card:nth-child(2) .res-card-icon { background: linear-gradient(135deg, #D0E8FF, #A0D0FF); }
+    .res-card:nth-child(3) .res-card-icon { background: linear-gradient(135deg, #D4F0E0, #A8E0C0); }
+    .res-card:nth-child(4) .res-card-icon { background: linear-gradient(135deg, #E0D8F8, #C0B0F0); }
+    .res-card:nth-child(5) .res-card-icon { background: linear-gradient(135deg, #FFD8D0, #FFB0A0); }
+    .res-card-text h4 { font-size: .88rem; font-weight: 600; color: var(--bark); }
+    .res-card-text p { font-size: .75rem; color: var(--gold-deep); font-weight: 600; margin-top: .1rem; }
 
     /*================================================================
       FINANCES
     ================================================================*/
-    .finances { padding: 3rem 2rem; text-align: center; background: var(--cream); }
-    .finances h2 { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--brown); }
-    .finances h2 span { color: var(--honey); }
-    .fiscal-box { max-width: 650px; margin: 1.5rem auto 0; }
-    .fiscal-box .photo-inner { aspect-ratio: 16/7; background: var(--warm-white); border-radius: 14px; }
+    .finances { padding: 3.5rem 0; text-align: center; background: var(--cream); }
+    .finances h2 { font-family: var(--serif); font-size: clamp(1.4rem, 2.8vw, 2rem); font-weight: 700; color: var(--bark); margin-bottom: .4rem; }
+    .finances h2 em { color: var(--wine); font-style: italic; }
+    .finances h2 span { color: var(--gold-deep); }
+    .fiscal-frame { max-width: 620px; margin: 1.5rem auto 0; }
+    .fiscal-frame .frame-inner { aspect-ratio: 16/7; background: var(--ivory); border-radius: 14px; }
 
     /*================================================================
       CONTACT
     ================================================================*/
-    .contact { padding: 3rem 2rem; background: var(--warm-white); position: relative; overflow: hidden; }
-    .contact-inner { max-width: 950px; margin: 0 auto; }
-    .contact-hero-img { max-width: 500px; margin: 0 auto 1.5rem; }
-    .contact-hero-img .photo-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--cream), var(--sky-pale)); }
-    .contact h2 { font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--brown); text-align: center; margin-bottom: 0.3rem; }
-    .contact h2 span { color: var(--wine); }
-    .contact .contact-subtitle { font-size: 1.1rem; color: var(--text); text-align: center; margin-bottom: 1.75rem; }
-    .contact .contact-subtitle em { color: var(--wine); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; align-items: start; }
-    .contact-card { background: white; border-radius: 22px; padding: 1.75rem 1.5rem; box-shadow: 0 8px 28px rgba(92,61,46,0.05); border: 2px solid var(--cream-dark); }
-    .ci-list { display: flex; flex-direction: column; gap: 1.2rem; }
-    .ci { display: flex; gap: 0.9rem; align-items: flex-start; }
-    .ci-icon { width: 42px; height: 42px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-    .ci:nth-child(1) .ci-icon { background: linear-gradient(135deg, #B5DEFF, #5BB5E8); }
-    .ci:nth-child(2) .ci-icon { background: linear-gradient(135deg, #A8E6CF, #6BA368); }
-    .ci:nth-child(3) .ci-icon { background: linear-gradient(135deg, #FFECD2, #FCB69F); }
-    .ci-text .ci-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.15rem; }
-    .ci-text p { font-size: 0.95rem; color: var(--text); line-height: 1.5; }
-    .ci-text a { color: var(--text); text-decoration: none; }
-    .ci-text a:hover { color: var(--honey); }
-    .cf { display: flex; flex-direction: column; gap: 0.8rem; }
-    .cf label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--brown); margin-bottom: 0.25rem; }
-    .cf input, .cf textarea { width: 100%; padding: 0.7rem 1rem; font-family: var(--body); font-size: 0.88rem; color: var(--ink); background: var(--cream); border: 2px solid var(--cream-dark); border-radius: 13px; outline: none; transition: all 0.3s; }
-    .cf input:focus, .cf textarea:focus { border-color: var(--honey); background: white; box-shadow: 0 0 0 4px var(--honey-glow); }
-    .cf textarea { resize: vertical; min-height: 80px; }
+    .contact { padding: 4rem 0; background: var(--ivory); }
+    .contact-top { text-align: center; margin-bottom: 2rem; }
+    .contact-top .frame { max-width: 480px; margin: 0 auto 1.25rem; }
+    .contact-top .frame-inner { aspect-ratio: 16/9; background: linear-gradient(135deg, var(--cream), #E8F0F8); }
+    .contact-top h2 { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 700; color: var(--bark); }
+    .contact-top h2 span { color: var(--wine); }
+    .contact-sub { font-size: 1.05rem; color: var(--text-soft); margin-top: .3rem; }
+    .contact-sub em { color: var(--wine); font-style: italic; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; align-items: start; max-width: 900px; margin: 0 auto; }
+    .contact-card { background: #fff; border-radius: 20px; padding: 1.75rem 1.5rem; box-shadow: 0 8px 30px rgba(0,0,0,.04); border: 1px solid rgba(0,0,0,.04); }
+    .form-stack { display: flex; flex-direction: column; gap: .75rem; }
+    .form-stack label { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--bark); margin-bottom: .15rem; display: block; }
+    .form-stack input, .form-stack textarea { width: 100%; padding: .7rem 1rem; font-family: var(--sans); font-size: .88rem; color: var(--text); background: var(--cream); border: 2px solid transparent; border-radius: 12px; outline: none; transition: all .3s; }
+    .form-stack input:focus, .form-stack textarea:focus { border-color: var(--gold); background: #fff; box-shadow: 0 0 0 4px var(--gold-glow); }
+    .form-stack textarea { resize: vertical; min-height: 80px; }
+    .info-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .info-item { display: flex; gap: .85rem; align-items: flex-start; }
+    .info-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0; }
+    .info-item:nth-child(1) .info-icon { background: linear-gradient(135deg, #D0E8FF, #A0D0FF); }
+    .info-item:nth-child(2) .info-icon { background: linear-gradient(135deg, #D4F0E0, #A8E0C0); }
+    .info-item:nth-child(3) .info-icon { background: linear-gradient(135deg, #FFF0D4, #FFDDA6); }
+    .info-label { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--bark-light); margin-bottom: .1rem; }
+    .info-text { font-size: .92rem; color: var(--text-soft); line-height: 1.5; }
+    .info-text a { color: var(--text-soft); text-decoration: none; transition: color .3s; }
+    .info-text a:hover { color: var(--gold-deep); }
 
     /*================================================================
       FOOTER
     ================================================================*/
-    footer { background: var(--brown); padding: 1.75rem 2rem; text-align: center; color: rgba(255,255,255,0.55); font-size: 0.82rem; position: relative; overflow: hidden; }
-    footer::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(255,255,255,0.02) 25px, rgba(255,255,255,0.02) 50px); }
-    .footer-logo { font-family: var(--display); font-size: 1.2rem; color: white; margin-bottom: 0.3rem; position: relative; z-index: 1; }
-    .footer-logo span { color: var(--honey-light); }
+    footer {
+      background: var(--bark); padding: 2rem 2rem; text-align: center; position: relative; overflow: hidden;
+      color: rgba(255,255,255,.45); font-size: .8rem;
+    }
+    footer::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(-45deg, transparent, transparent 25px, rgba(255,255,255,.015) 25px, rgba(255,255,255,.015) 50px); }
+    .footer-brand { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: .3rem; position: relative; z-index: 1; }
+    .footer-brand b { color: var(--gold-light); }
     footer p { position: relative; z-index: 1; }
+
+    /* ── Section dividers ── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--cream-warm), transparent); }
+    .divider-gold { height: 2px; background: linear-gradient(90deg, transparent, rgba(212,165,67,.25), transparent); }
 
     /*================================================================
       RESPONSIVE
     ================================================================*/
-    @media (max-width: 900px) {
-      .hero-inner, .enthusiastic-inner, .shayala-body { grid-template-columns: 1fr; }
-      .hero-inner { text-align: center; }
-      .hero-video { max-width: 420px; margin: 0 auto; }
-      .shayala-body-photo { max-width: 280px; margin: 0 auto; }
+    @media (max-width: 960px) {
+      .home-hero-inner, .pillars-layout, .shayala-body { grid-template-columns: 1fr; }
+      .home-hero-inner { text-align: center; }
+      .home-hero-badges { justify-content: center; }
+      .video-wrap { max-width: 400px; margin: 0 auto; }
+      .shayala-photo { max-width: 260px; margin: 0 auto; }
       .leadership-grid { grid-template-columns: 1fr 1fr; }
-      .mission-grid { grid-template-columns: 1fr 1fr; }
+      .mission-grid { grid-template-columns: repeat(2, 1fr); }
       .contact-grid { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .lookback-carousel { gap: 1rem; }
-      .lookback-vid { width: 200px; }
+      .hamburger { display: flex; }
+      .flywheel-frame { max-width: 300px; margin: 0 auto; }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
+      .page-hero { padding: 5rem 1.25rem 2rem; }
+      .page-hero-title { font-size: 1.8rem; }
+      .home-hero { padding: 2rem 0 1.5rem; }
+      .home-hero h2 { font-size: 1.4rem; }
+      .video-wrap { max-width: 100%; }
+      .video-wrap .frame { transform: none; }
+      .lookback { padding: 1.5rem 0; }
+      .lookback-row { flex-direction: column; align-items: center; gap: .75rem; }
+      .lookback-item { width: 100%; max-width: 300px; }
+      .pillars { padding: 2.5rem 0; }
+      .pillar-icon { width: 38px; height: 38px; font-size: 1.1rem; }
+      .cta-band { padding: 2.5rem 1.25rem; }
+      .cta-tagline { padding: 2rem 1.25rem; }
+      .mission { padding: 2.5rem 0; }
+      .mission-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+      .m-pill { padding: 1.15rem .8rem; }
+      .shayala { padding: 2.5rem 0; }
+      .shayala-body { gap: 1.5rem; }
+      .leadership { padding: 2.5rem 0; }
+      .leadership-grid { grid-template-columns: 1fr 1fr; gap: .75rem; }
+      .l-card { padding: 1.15rem 1rem; }
+      .resources { padding: 2.5rem 0; }
+      .res-grid { grid-template-columns: 1fr; }
+      .finances { padding: 2.5rem 0; }
+      .contact { padding: 2.5rem 0; }
+      nav { padding: .65rem 1.25rem; }
+      .container { padding: 0 1.25rem; }
+    }
+    @media (max-width: 420px) {
+      .page-hero-title { font-size: 1.55rem; }
       .leadership-grid { grid-template-columns: 1fr; }
       .mission-grid { grid-template-columns: 1fr; }
-      .lookback-vid { width: 160px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ─── NAV ─── -->
   <nav id="nav">
-    <div class="nav-logo">
-      <div class="nav-logo-icon">🕎</div>
-      <div class="nav-logo-text">Be'er <span>Yeshaya</span></div>
-    </div>
+    <a href="#" class="nav-brand">
+      <div class="nav-brand-mark">🕎</div>
+      <div class="nav-brand-name">Be'er <b>Yeshaya</b></div>
+    </a>
     <div class="nav-links">
       <a href="#home">Home</a>
       <a href="#mission">Our Mission</a>
       <a href="#shayala">Reb Shayala</a>
       <a href="#leadership">Leadership</a>
-      <div class="nav-dropdown">
-        <a href="#resources" style="cursor:pointer;">Resources ▾</a>
-        <div class="nav-dropdown-content">
+      <div class="nav-dd">
+        <a href="#resources">Resources ▾</a>
+        <div class="nav-dd-menu">
           <a href="#resources">Parent Handbook</a>
           <a href="#resources">Cheder Calendar</a>
           <a href="#resources">Application</a>
@@ -355,135 +393,145 @@
         </div>
       </div>
       <a href="#finances">Finances</a>
-      <a href="#contact" class="nav-cta">We're Listening</a>
+      <a href="#contact" class="nav-cta-btn">We're Listening</a>
     </div>
-    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- PAGE HEADER -->
-  <div class="page-header">
-    <h1>Cheder Be'er <span>Yeshaya</span></h1>
-    <p class="location">Suffern, NY</p>
-  </div>
+  <!-- ─── PAGE HERO ─── -->
+  <header class="page-hero">
+    <div class="hero-dot hero-dot-1"></div>
+    <div class="hero-dot hero-dot-2"></div>
+    <div class="hero-dot hero-dot-3"></div>
+    <h1 class="page-hero-title">Cheder Be'er <span class="accent">Yeshaya</span></h1>
+    <p class="page-hero-loc">Suffern, NY</p>
+    <div class="page-hero-divider"></div>
+  </header>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="clouds-wrap"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div></div>
-    <span class="sparkle" style="top:12%;left:6%;--sz:22px;--op:0.1;--delay:0s">✡</span>
-    <span class="sparkle" style="top:65%;left:4%;--sz:15px;--op:0.08;--delay:1.2s">✦</span>
-    <span class="sparkle" style="top:20%;right:8%;--sz:19px;--op:0.09;--delay:0.7s">✡</span>
-    <span class="sparkle" style="top:75%;right:6%;--sz:13px;--op:0.07;--delay:2.1s">✦</span>
-    <div class="hero-inner">
-      <div>
-        <h1>Transform your child into a <span class="hl">Ben Melech</span>. 🌟</h1>
-      </div>
-      <div class="hero-video">
-        <div class="photo-frame">
-          <div class="photo-inner">
-            <div class="icon">▶️</div>
-            <div class="label">[ Video ]</div>
+  <!-- ─── HOME HERO ─── -->
+  <section class="home-hero" id="home">
+    <div class="container">
+      <div class="home-hero-inner">
+        <div class="reveal">
+          <span class="section-tag tag-gold">✦ Home</span>
+          <h2>Transform your child into a <span class="hl">Ben Melech</span>. ✨</h2>
+          <div class="home-hero-badges">
+            <div class="badge"><em>❤️</em> For the child.</div>
+            <div class="badge"><em>🌱</em> With the family.</div>
           </div>
         </div>
-        <div class="sticker sticker-a">❤️ For the child.</div>
-        <div class="sticker sticker-b">🌱 With the family.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- LOOK BACK -->
-  <section class="lookback reveal">
-    <h3>A look back at our forward-thinking <em>Cheder</em>:</h3>
-    <div class="lookback-carousel">
-      <div class="lookback-vid photo-frame"><div class="photo-inner"><div class="icon">▶️</div></div></div>
-      <div class="lookback-vid photo-frame"><div class="photo-inner"><div class="icon">▶️</div></div></div>
-      <div class="lookback-vid photo-frame"><div class="photo-inner"><div class="icon">▶️</div></div></div>
-    </div>
-  </section>
-
-  <!-- POSITIVELY ENTHUSIASTIC -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,55 400,0 600,28 C800,55 1000,0 1200,28 L1200,55 L0,55Z" fill="#FFFDF8"/></svg></div>
-  <section class="enthusiastic">
-    <div class="enthusiastic-inner">
-      <div class="reveal">
-        <h2>Positively enthusiastic growth. ✨</h2>
-        <p class="sub">Because a <em>Cheder's</em> <strong>environment</strong> teaches even more than its <strong>library</strong>:</p>
-        <div class="pillar-list">
-          <div class="pillar-item reveal"><div class="pip">🤝</div><h4><em>Chinuch</em> is a <strong>partnership</strong></h4></div>
-          <div class="pillar-item reveal rd1"><div class="pip">📚</div><h4><strong>Higher education</strong> matters</h4></div>
-          <div class="pillar-item reveal rd2"><div class="pip">🕯️</div><h4><em>Yiddishkeit</em> is an <strong>experience</strong></h4></div>
-          <div class="pillar-item reveal rd3"><div class="pip">🌍</div><h4><strong>Real-life readiness</strong> is a must</h4></div>
-          <div class="pillar-item reveal rd4"><div class="pip">📖</div><h4><em>Derech halimud</em> begins here</h4></div>
-          <div class="pillar-item reveal rd5"><div class="pip">💛</div><h4><em>Middos</em> involve <strong>lev</strong> and <strong>nefesh</strong></h4></div>
-        </div>
-      </div>
-      <div class="reveal rd2">
-        <div class="photo-frame flywheel-frame">
-          <div class="photo-inner">
-            <div class="icon">🔄</div>
-            <div class="label">{Brand Flywheel}</div>
+        <div class="video-wrap reveal d2">
+          <div class="frame">
+            <div class="frame-inner">
+              <div class="ph-icon">▶️</div>
+              <div class="ph-label">[ Video ]</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA BAR -->
-  <section class="home-cta">
+  <!-- ─── LOOKBACK ─── -->
+  <section class="lookback">
+    <div class="container">
+      <p class="lookback-title reveal">A look back at our forward-thinking <em>Cheder</em>:</p>
+      <div class="lookback-row">
+        <div class="lookback-item reveal frame"><div class="frame-inner"><div class="ph-icon">▶️</div></div></div>
+        <div class="lookback-item reveal d1 frame"><div class="frame-inner"><div class="ph-icon">▶️</div></div></div>
+        <div class="lookback-item reveal d2 frame"><div class="frame-inner"><div class="ph-icon">▶️</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ─── PILLARS ─── -->
+  <section class="pillars">
+    <div class="container">
+      <div class="pillars-layout">
+        <div>
+          <div class="pillars-header reveal">
+            <h2>Positively enthusiastic growth. ✨</h2>
+            <p>Because a <em>Cheder's</em> <strong>environment</strong> teaches even more than its <strong>library</strong>:</p>
+          </div>
+          <div class="pillar-stack">
+            <div class="pillar-card reveal"><div class="pillar-icon pi-1">🤝</div><h4><em>Chinuch</em> is a <strong>partnership</strong></h4></div>
+            <div class="pillar-card reveal d1"><div class="pillar-icon pi-2">📚</div><h4><strong>Higher education</strong> matters</h4></div>
+            <div class="pillar-card reveal d2"><div class="pillar-icon pi-3">🕯️</div><h4><em>Yiddishkeit</em> is an <strong>experience</strong></h4></div>
+            <div class="pillar-card reveal d3"><div class="pillar-icon pi-4">🌍</div><h4><strong>Real-life readiness</strong> is a must</h4></div>
+            <div class="pillar-card reveal d4"><div class="pillar-icon pi-5">📖</div><h4><em>Derech halimud</em> begins here</h4></div>
+            <div class="pillar-card reveal d5"><div class="pillar-icon pi-6">💛</div><h4><em>Middos</em> involve <strong>lev</strong> and <strong>nefesh</strong></h4></div>
+          </div>
+        </div>
+        <div class="reveal d3">
+          <div class="frame flywheel-frame">
+            <div class="frame-inner">
+              <div class="ph-icon">🔄</div>
+              <div class="ph-label">{Brand Flywheel}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA BAND ─── -->
+  <section class="cta-band">
     <h2>The <em>Cheder</em> you wished you had.</h2>
-    <div class="home-cta-links">
-      <a href="#mission" class="btn btn-honey">Our Mission →</a>
-    </div>
+    <a href="#mission" class="btn btn-gold">Our Mission →</a>
+  </section>
+  <section class="cta-tagline">
+    <h2 class="reveal"><em>For</em> the child. <em>With</em> the family.</h2>
+    <a href="#shayala" class="btn btn-wine reveal d1">Reb Shayala →</a>
   </section>
 
-  <section class="home-bottom reveal">
-    <h2><em>For</em> the child. <em>With</em> the family.</h2>
-    <div class="links">
-      <a href="#shayala" class="btn btn-wine">Reb Shayala →</a>
-    </div>
-  </section>
+  <div class="divider-gold"></div>
 
-  <!-- OUR MISSION -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,0 400,55 600,28 C800,0 1000,55 1200,28 L1200,55 L0,55Z" fill="#FFF8ED"/></svg></div>
+  <!-- ─── MISSION ─── -->
   <section class="mission" id="mission">
-    <div class="mission-top reveal">
-      <h2>Don't teach children to <em>learn</em>. Teach them to <em>live</em>.</h2>
-      <div class="photo-frame">
-        <div class="photo-inner">
-          <div class="icon">🏔️</div>
-          <div class="label">[ Image ]</div>
+    <div class="container">
+      <div class="mission-intro reveal">
+        <span class="section-tag tag-wine">✦ Our Mission</span>
+        <h2>Don't teach children to <em>learn</em>. Teach them to <em>live</em>.</h2>
+        <div class="frame">
+          <div class="frame-inner">
+            <div class="ph-icon">🏔️</div>
+            <div class="ph-label">[ Image ]</div>
+          </div>
         </div>
+        <p>Cheder Be'er Yeshaya is on a mission to connect each child to the life they are meant to lead.</p>
       </div>
-      <p class="mission-sub" style="margin-top:1rem;">Cheder Be'er Yeshaya is on a mission to connect each child to the life they are meant to lead.</p>
-    </div>
 
-    <div class="mission-pillars-header reveal">
-      <h3>How we <span>kindle</span> their light:</h3>
-    </div>
+      <div class="mission-kindle reveal"><h3>How we <span>kindle</span> their light:</h3></div>
 
-    <div class="mission-grid">
-      <div class="mission-pill reveal"><div class="m-icon">🤝</div><h4><em>Chinuch</em> is a <strong>partnership</strong>.</h4></div>
-      <div class="mission-pill reveal rd1"><div class="m-icon">📚</div><h4><strong>Higher education</strong> matters.</h4></div>
-      <div class="mission-pill reveal rd2"><div class="m-icon">🕯️</div><h4><em>Yiddishkeit</em> is an <strong>experience</strong>.</h4></div>
-      <div class="mission-pill reveal rd3"><div class="m-icon">🌍</div><h4><strong>Real-life readiness</strong> is a must.</h4></div>
-      <div class="mission-pill reveal rd4"><div class="m-icon">📖</div><h4><em>Derech halimud</em> begins here.</h4></div>
-      <div class="mission-pill reveal rd5"><div class="m-icon">💛</div><h4><em>Middos</em> involve <strong>lev</strong> and <strong>nefesh</strong>.</h4></div>
-    </div>
+      <div class="mission-grid">
+        <div class="m-pill reveal"><div class="m-pill-icon pi-1">🤝</div><h4><em>Chinuch</em> is a <strong>partnership</strong>.</h4></div>
+        <div class="m-pill reveal d1"><div class="m-pill-icon pi-2">📚</div><h4><strong>Higher education</strong> matters.</h4></div>
+        <div class="m-pill reveal d2"><div class="m-pill-icon pi-3">🕯️</div><h4><em>Yiddishkeit</em> is an <strong>experience</strong>.</h4></div>
+        <div class="m-pill reveal d3"><div class="m-pill-icon pi-4">🌍</div><h4><strong>Real-life readiness</strong> is a must.</h4></div>
+        <div class="m-pill reveal d4"><div class="m-pill-icon pi-5">📖</div><h4><em>Derech halimud</em> begins here.</h4></div>
+        <div class="m-pill reveal d5"><div class="m-pill-icon pi-6">💛</div><h4><em>Middos</em> involve <strong>lev</strong> and <strong>nefesh</strong>.</h4></div>
+      </div>
 
-    <div class="mission-bottom reveal">
-      <h3><em>For</em> the child. <em>With</em> the family.</h3>
-      <div class="link"><a href="#shayala" class="btn btn-wine">Reb Shayala →</a></div>
+      <div class="mission-foot reveal">
+        <h3><em>For</em> the child. <em>With</em> the family.</h3>
+        <a href="#shayala" class="btn btn-wine">Reb Shayala →</a>
+      </div>
     </div>
   </section>
 
-  <!-- REB SHAYALA -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,55 400,0 600,28 C800,55 1000,0 1200,28 L1200,55 L0,55Z" fill="#FFFDF8"/></svg></div>
+  <div class="divider"></div>
+
+  <!-- ─── REB SHAYALA ─── -->
   <section class="shayala" id="shayala">
-    <div class="shayala-inner">
-      <div class="shayala-hero reveal">
-        <div class="photo-frame">
-          <div class="photo-inner">
-            <div class="icon">🕎</div>
-            <div class="label">[ Image ]</div>
+    <div class="container">
+      <div class="shayala-top reveal">
+        <span class="section-tag tag-wine">✦ Reb Shayala</span>
+        <div class="frame">
+          <div class="frame-inner">
+            <div class="ph-icon">🕎</div>
+            <div class="ph-label">[ Image ]</div>
           </div>
         </div>
         <h2>The belief in every <span>Yid</span>. 💜</h2>
@@ -491,54 +539,58 @@
       </div>
 
       <div class="shayala-body">
-        <div class="shayala-body-text reveal">
+        <div class="shayala-text reveal">
           <h3>Feeding <em>Neshoma</em>.</h3>
           <p>Reb Shayala lives his life in the mundane. He ladles hot soup to common guests. He helps Yidden find a livelihood. He inquires about the little things in everyday life. <strong>He sees every Yid for who he is.</strong></p>
-          <div class="callout">
-            <span style="font-size:1.6rem;">✡️</span>
+          <div class="shayala-callout">
+            <span style="font-size:1.5rem;">✡️</span>
             <span>Reb Shayala is in the <em>Cheder</em>.</span>
           </div>
         </div>
-        <div class="shayala-body-photo reveal rd2">
-          <div class="photo-frame">
-            <div class="photo-inner">
-              <div class="icon">🖼️</div>
-              <div class="label">[ Image ]</div>
+        <div class="shayala-photo reveal d2">
+          <div class="frame">
+            <div class="frame-inner">
+              <div class="ph-icon">🖼️</div>
+              <div class="ph-label">[ Image ]</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="shayala-bottom reveal">
+      <div class="shayala-foot reveal">
         <h3>The <em>Cheder</em> you wished you had.</h3>
-        <div class="link"><a href="#mission" class="btn btn-honey">Our Mission →</a></div>
+        <a href="#mission" class="btn btn-gold">Our Mission →</a>
       </div>
     </div>
   </section>
 
-  <!-- LEADERSHIP -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,0 400,55 600,28 C800,0 1000,55 1200,28 L1200,55 L0,55Z" fill="#FFF8ED"/></svg></div>
+  <div class="divider-gold"></div>
+
+  <!-- ─── LEADERSHIP ─── -->
   <section class="leadership" id="leadership">
-    <div class="leadership-inner">
-      <h2 class="reveal">Leadership 🏛️</h2>
+    <div class="container">
+      <div class="leadership-head reveal">
+        <span class="section-tag tag-gold">✦ Leadership</span>
+        <h2>Leadership 🏛️</h2>
+      </div>
       <div class="leadership-grid">
-        <div class="lg reveal">
-          <div class="lg-icon">📜</div>
+        <div class="l-card reveal">
+          <div class="l-card-icon">📜</div>
           <h4>Rabbinical Advisory</h4>
           <ul><li>Rav Heller <em>Shlita</em></li><li>Rav Schlesinger <em>Shlita</em></li></ul>
         </div>
-        <div class="lg reveal rd1">
-          <div class="lg-icon">🏗️</div>
+        <div class="l-card reveal d1">
+          <div class="l-card-icon">🏗️</div>
           <h4>Board of Directors</h4>
           <ul><li>Yanky Karmel</li><li>Chakie Rosenfeld</li><li>Ari Flohr</li></ul>
         </div>
-        <div class="lg reveal rd2">
-          <div class="lg-icon">🎓</div>
+        <div class="l-card reveal d2">
+          <div class="l-card-icon">🎓</div>
           <h4>Vaad Hachinuch</h4>
           <ul><li>Rabbi Yosef Mendel Huss</li><li>Rabbi Shraga Gold</li><li>Rabbi Yoel Shimon Kestenbaum</li></ul>
         </div>
-        <div class="lg reveal rd3">
-          <div class="lg-icon">🌟</div>
+        <div class="l-card reveal d3">
+          <div class="l-card-icon">🌟</div>
           <h4>Cheder Leadership</h4>
           <ul>
             <li>Rabbi Shmelke Dachner<span class="role">Menahel</span></li>
@@ -549,70 +601,81 @@
     </div>
   </section>
 
-  <!-- RESOURCES -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,55 400,0 600,28 C800,55 1000,0 1200,28 L1200,55 L0,55Z" fill="#FFFDF8"/></svg></div>
+  <div class="divider"></div>
+
+  <!-- ─── RESOURCES ─── -->
   <section class="resources" id="resources">
-    <div class="resources-inner">
-      <h2 class="reveal">Resources 📋</h2>
+    <div class="container">
+      <div class="resources-head reveal">
+        <span class="section-tag tag-gold">✦ Resources</span>
+        <h2>Resources 📋</h2>
+      </div>
       <div class="res-grid">
-        <a class="res-card reveal" href="#"><div class="res-icon">📘</div><div class="res-text"><h4>Parent Handbook</h4><p>Download/View ></p></div></a>
-        <a class="res-card reveal rd1" href="#"><div class="res-icon">📅</div><div class="res-text"><h4>Cheder Calendar</h4><p>Download/View ></p></div></a>
-        <a class="res-card reveal rd2" href="#"><div class="res-icon">📝</div><div class="res-text"><h4>Application</h4><p>Apply Here ></p></div></a>
-        <a class="res-card reveal rd3" href="#"><div class="res-icon">💳</div><div class="res-text"><h4>Tuition Payments</h4><p>Access Your Account ></p></div></a>
-        <a class="res-card reveal rd4" href="#"><div class="res-icon">❤️</div><div class="res-text"><h4>Donations</h4><p>Partner with the Future ></p></div></a>
+        <a class="res-card reveal" href="#"><div class="res-card-icon">📘</div><div class="res-card-text"><h4>Parent Handbook</h4><p>Download/View ›</p></div></a>
+        <a class="res-card reveal d1" href="#"><div class="res-card-icon">📅</div><div class="res-card-text"><h4>Cheder Calendar</h4><p>Download/View ›</p></div></a>
+        <a class="res-card reveal d2" href="#"><div class="res-card-icon">📝</div><div class="res-card-text"><h4>Application</h4><p>Apply Here ›</p></div></a>
+        <a class="res-card reveal d3" href="#"><div class="res-card-icon">💳</div><div class="res-card-text"><h4>Tuition Payments</h4><p>Access Your Account ›</p></div></a>
+        <a class="res-card reveal d4" href="#"><div class="res-card-icon">❤️</div><div class="res-card-text"><h4>Donations</h4><p>Partner with the Future ›</p></div></a>
       </div>
     </div>
   </section>
 
-  <!-- FINANCES -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,0 400,55 600,28 C800,0 1000,55 1200,28 L1200,55 L0,55Z" fill="#FFF8ED"/></svg></div>
+  <div class="divider-gold"></div>
+
+  <!-- ─── FINANCES ─── -->
   <section class="finances" id="finances">
-    <div class="reveal">
-      <h2><em>Klal Yisroel's</em> highest <span>performing investment</span>.</h2>
-      <div class="fiscal-box photo-frame">
-        <div class="photo-inner">
-          <div class="label">{Fiscal Graphs}</div>
+    <div class="container">
+      <div class="reveal">
+        <span class="section-tag tag-gold">✦ Finances</span>
+        <h2><em>Klal Yisroel's</em> highest <span>performing investment</span>.</h2>
+        <div class="fiscal-frame frame">
+          <div class="frame-inner">
+            <div class="ph-label">{Fiscal Graphs}</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <div class="wave"><svg viewBox="0 0 1200 55" preserveAspectRatio="none"><path d="M0,28 C200,55 400,0 600,28 C800,55 1000,0 1200,28 L1200,55 L0,55Z" fill="#FFFDF8"/></svg></div>
-  <section class="contact" id="contact">
-    <div class="contact-inner">
-      <div class="contact-hero-img photo-frame reveal">
-        <div class="photo-inner">
-          <div class="icon">🖼️</div>
-          <div class="label">[ Image ]</div>
-        </div>
-      </div>
+  <div class="divider"></div>
 
-      <h2 class="reveal">We're <span>Listening</span> 💌</h2>
-      <p class="contact-subtitle reveal"><strong>Let's transform your child into a <em>Ben Melech</em>.</strong></p>
+  <!-- ─── CONTACT ─── -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-top reveal">
+        <span class="section-tag tag-wine">✦ We're Listening</span>
+        <div class="frame">
+          <div class="frame-inner">
+            <div class="ph-icon">🖼️</div>
+            <div class="ph-label">[ Image ]</div>
+          </div>
+        </div>
+        <h2>We're <span>Listening</span> 💌</h2>
+        <p class="contact-sub"><strong>Let's transform your child into a <em>Ben Melech</em>.</strong></p>
+      </div>
 
       <div class="contact-grid">
         <div class="contact-card reveal">
-          <div class="cf">
-            <div><label>Name*</label><input type="text" placeholder="Name"></div>
-            <div><label>Email*</label><input type="email" placeholder="Email"></div>
-            <div><label>Message*</label><textarea placeholder="Message"></textarea></div>
-            <button class="btn btn-honey" type="button">Submit > ✨</button>
+          <div class="form-stack">
+            <div><label>Name *</label><input type="text" placeholder="Your name"></div>
+            <div><label>Email *</label><input type="email" placeholder="you@email.com"></div>
+            <div><label>Message *</label><textarea placeholder="How can we help?"></textarea></div>
+            <button class="btn btn-gold" type="button">Submit ✨</button>
           </div>
         </div>
-        <div class="contact-card reveal rd2">
-          <div class="ci-list">
-            <div class="ci">
-              <div class="ci-icon">🏫</div>
-              <div class="ci-text"><div class="ci-label">Visit</div><p>Cheder Be'er Yeshaya<br>4 Cambell Avenue<br>Suffern, NY 10901</p></div>
+        <div class="contact-card reveal d2">
+          <div class="info-list">
+            <div class="info-item">
+              <div class="info-icon">🏫</div>
+              <div><div class="info-label">Visit</div><p class="info-text">Cheder Be'er Yeshaya<br>4 Cambell Avenue<br>Suffern, NY 10901</p></div>
             </div>
-            <div class="ci">
-              <div class="ci-icon">📞</div>
-              <div class="ci-text"><div class="ci-label">Call</div><p><a href="tel:8456946015">845.694.6015</a></p></div>
+            <div class="info-item">
+              <div class="info-icon">📞</div>
+              <div><div class="info-label">Call</div><p class="info-text"><a href="tel:8456946015">845.694.6015</a></p></div>
             </div>
-            <div class="ci">
-              <div class="ci-icon">✉️</div>
-              <div class="ci-text"><div class="ci-label">Email</div><p><a href="mailto:admin@chederby.org">admin@chederby.org</a></p></div>
+            <div class="info-item">
+              <div class="info-icon">✉️</div>
+              <div><div class="info-label">Email</div><p class="info-text"><a href="mailto:admin@chederby.org">admin@chederby.org</a></p></div>
             </div>
           </div>
         </div>
@@ -620,41 +683,30 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ─── FOOTER ─── -->
   <footer>
-    <div class="footer-logo">Cheder Be'er <span>Yeshaya</span></div>
-    <p>© Cheder Be'er Yeshaya • All Rights Reserved</p>
+    <div class="footer-brand">Cheder Be'er <b>Yeshaya</b></div>
+    <p>© Cheder Be'er Yeshaya · All Rights Reserved</p>
   </footer>
 
   <script>
-    // Navbar scroll effect
+    // Navbar scroll
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
 
     // Reveal on scroll
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    // Smooth scroll for anchor links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
     });
 
-    // Fallback: make all reveals visible after 1.5s in case observer doesn't fire (e.g. in iframe previews)
-    setTimeout(() => {
-      document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
-    }, 1500);
+    // Fallback reveal for iframes/previews
+    setTimeout(() => { document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible')); }, 1500);
   </script>
 </body>
 </html>
