@@ -1228,6 +1228,59 @@
       .carousel-dots { display: flex !important; }
     }
 
+  
+    /* === ANDROID MOBILE FIX (matching sample 4/5) === */
+    @media (max-width: 768px) {
+      body, html { overflow-x: hidden !important; }
+      
+      /* Carousel: full width single video */
+      .carousel-section { 
+        padding: 2rem 1rem !important; 
+        overflow: hidden !important; 
+      }
+      .carousel-head h2 { 
+        font-size: 1.3rem !important; 
+        white-space: normal !important; 
+        text-align: center !important; 
+      }
+      .carousel {
+        padding: 0 !important;
+      }
+      .carousel-track {
+        position: relative !important;
+        aspect-ratio: 16/9 !important;
+        overflow: hidden !important;
+        border-radius: 12px !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+      .video-tile {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-width: 100% !important;
+        flex: none !important;
+        opacity: 0 !important;
+        border-radius: 12px !important;
+        transition: opacity 0.5s ease !important;
+      }
+      .video-tile.active { opacity: 1 !important; }
+      .carousel-arrow {
+        width: 36px !important;
+        height: 36px !important;
+      }
+      .carousel-dots { display: flex !important; }
+      
+      /* Flywheel on mobile */
+      .hero-flywheel {
+        max-width: 300px !important;
+        margin: 1rem auto !important;
+      }
+    }
+
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-69DPB1T992"></script>
