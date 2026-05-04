@@ -1204,6 +1204,30 @@
       .hero-logo { width: 200px; max-width: 58%; margin-bottom: 1.2rem; }
       .hero-flywheel { max-width: min(520px, 48vh); margin-top: 1.25rem; }
     }
+  
+    /* === ANDROID MOBILE: carousel single video centered === */
+    @media (max-width: 768px) {
+      .carousel-section { overflow: hidden !important; }
+      .carousel-head h2 { white-space: normal !important; }
+      .carousel-track {
+        position: relative !important;
+        aspect-ratio: 16/9 !important;
+        overflow: hidden !important;
+        border-radius: 12px !important;
+      }
+      .video-tile {
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        min-width: 100% !important;
+        opacity: 0 !important;
+        transition: opacity 0.5s ease !important;
+      }
+      .video-tile.active { opacity: 1 !important; }
+      .carousel-dots { display: flex !important; }
+    }
+
   </style>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-69DPB1T992"></script>
